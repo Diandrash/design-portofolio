@@ -4,14 +4,28 @@
     "functions": {
         "api/index.php": { "runtime": "vercel-php@0.6.0" }
     },
-    "routes": [{
-        "src": "/(.*)",
-        "dest": "/api/index.php"
-    }],
+    "routes": [
+        {
+          "src": "/build/(.*)",
+          "dest": "/public/build/"
+        },
+        {
+          "src": "/resources/(.*)",
+          "dest": "/public/resources/"
+        },
+        {
+          "src": "/favicon/(.*)",
+          "dest": "/public/favicon/"
+        },
+        {
+          "src": "/(.*)",
+          "dest": "/api/index.php"
+        }
+      ],
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "true",
-        "APP_URL": "https://yourproductionurl.com",
+        "APP_URL": "https://design-portofolio.vercel.app/",
         "APP_KEY": "base64:Jb2UTskPicYa+IHujZ+PfNi1ZcnvN6lKR23mTq6rVEw=",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
