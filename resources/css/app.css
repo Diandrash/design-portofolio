@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.navbar {
+    transition: all 0.3s ease;
+}
+
+.navbar-scrolled {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #ddd;
+}

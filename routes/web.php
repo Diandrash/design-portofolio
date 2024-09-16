@@ -21,19 +21,22 @@ Route::get('/', function () {
     return view('welcome', compact('files'));
 });
 
-Route::get('/home', function () {
+Route::get('/all', [FileController::class, 'index'])->name('file.all');
+
+Route::get('/home', ['as' => 'homme_path', 'uses' => function () {
     $files = File::latest()->take(8)->get();
     return view('welcome', compact('files'));
-});
+}]);
 
 Route::get('/login', [LoginController::class, 'signIn']);
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 Route::group(["middleware" => "auth"], function () {
     Route::get('/admin', function () {
-        $files = File::latest()->take(8)->get();
+        $files = File::orderBy('id', 'DESC')->get();
         return view('admin', compact('files'));
     })->name('admin');
+    Route::post('/admin/create', [FileController::class, 'store'])->name('file.store');
+    Route::put('/admin/update', [FileController::class, 'update'])->name('file.update');
+    Route::delete('/admin/delete', [FileController::class, 'destroy'])->name('file.destroy');
 });
-
-Route::post('/admin', [FileController::class, 'store'])->name('file.store');

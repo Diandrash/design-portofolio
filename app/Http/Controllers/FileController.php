@@ -6,6 +6,7 @@ use App\Models\File;
 use App\Http\Requests\StoreFileRequest;
 use App\Http\Requests\UpdateFileRequest;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Http\Request;
 // use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -16,7 +17,8 @@ class FileController extends Controller
      */
     public function index()
     {
-        //
+        $files = File::all();
+        return view('all', compact('files'));
     }
 
     /**
@@ -55,6 +57,7 @@ class FileController extends Controller
 
             // Ambil URL file yang diunggah
             $uploadedFileUrl = $uploadResult->getSecurePath();
+
         } catch (\Exception $e) {
             // Tangani kesalahan jika upload gagal
             return redirect()->back()->withErrors(['file' => 'File upload failed: ' . $e->getMessage()])->withInput();
@@ -70,8 +73,8 @@ class FileController extends Controller
         $files = File::all();
 
         // Redirect dengan pesan sukses
-        // return redirect()->route('admin')->with('success', 'File uploaded successfully.');
-        return view('admin', compact( 'files'));
+        return redirect()->route('admin')->with('success', 'File uploaded successfully.');
+        // return view('admin', compact( 'files'));
     }
 
     /**
@@ -95,14 +98,39 @@ class FileController extends Controller
      */
     public function update(UpdateFileRequest $request, File $file)
     {
-        //
+        $request->validate([
+            'file_id' => 'required|exists:files,id', // Pastikan file id ada di database
+            'name' => 'required|string|max:255',
+        ]);
+
+        // Temukan file berdasarkan id
+        $file = File::findOrFail($request->file_id);
+
+        // Update nama file
+        $file->name = $request->input('name');
+        $file->save();
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('admin')->with('success', 'File updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(File $file)
+    public function destroy(Request $request, File $file)
     {
-        //
+         $file = File::findOrFail($request->file_id);
+
+ 
+         try {
+             Cloudinary::destroy($file->path);
+ 
+             // Menghapus file dari database
+             $file->delete();
+ 
+             return redirect()->route('admin')->with('success', 'File deleted successfully');
+         } catch (\Exception $e) {
+             return redirect()->route('admin')->with('error', 'Failed to delete the file');
+         }
     }
 }

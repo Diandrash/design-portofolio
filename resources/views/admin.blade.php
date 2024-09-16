@@ -11,11 +11,12 @@
 
 
     {{-- START NAVBAR --}}
-    <nav class="flex justify-between items-center fixed py-5 px-10 text-white bg-[#041628] w-full">
+    <nav id="navbar" class="flex justify-between items-center fixed py-5 px-10 text-white bg-[#041628] w-full">
         <h1 class="uppercase font-semibold text-xl">Shadev. Design</h1>
         <ul class="list-area flex font-medium gap-16 text-lg pr-10">
-           <li><a href="#design">Manage Design</a></li> 
-           <li><a href="#contact">Contact</a></li> 
+            @auth
+            Welcome {{ auth()->user()->name }}
+           @endauth
         </ul>
     </nav>
     {{-- END NAVBAR --}}
@@ -38,80 +39,25 @@
         <h3 class="text-center text-white text-3xl font-semibold">Manage Portofolio Design</h3>
 
         <div class="designs-container w-11/12 flex flex-wrap gap-5 ">
-            <div id="input-new-design" class="w-[330px] h-[330px] shadow-sm text-white border-2 border-dashed border-white flex justify-center items-center hover:bg-blue-950 cursor-pointer">
+
+            <div id="input-new-design" class="w-[330px] h-auto h-min-[330px] shadow-sm text-white border-2 border-dashed border-white flex justify-center items-center hover:bg-blue-950 cursor-pointer">
                 <h1 class="text-xl font-semibold">Add Design</h1>
             </div>
+
             @foreach ($files as $file)
-                <img src="{{ $file->path }}" class="w-[330px] h-[330px] shadow-sm text-white" alt="{{ $file->name }}">                
+                <div class="image-container flex flex-col">
+                    <img src="{{ $file->path }}" class="w-[330px] h-[330px] shadow-sm text-white cursor-pointer" alt="{{ $file->name }}" onclick="openModal('{{ $file->path }}', '{{ $file->name }}')">                
+                    <h1 class="w-full bg-white text-black py-2 text-center font-semibold text-md">{{ $file->name }}</h1>
+                    <div class="action-area flex w-full">
+                        <button class="w-6/12 bg-amber-300 text-black font-semibold text-md py-3"  onclick="openEditModal('{{ $file->id }}', '{{ $file->name }}')">Edit Text</button>
+                        <button class="w-6/12 bg-red-800 text-white font-semibold text-md py-3" onclick="deleteFile('{{ $file->id }}')">Delete</button>
+                    </div>
+                </div>
             @endforeach
         </div>
 
-        <button class="py-2 px-10 bg-white hover:bg-slate-200 rounded-md text-black font-bold text-lg">Show More</button>
     </section>
     {{-- END DESIGN SECTION --}}
-
-    {{-- START ABOUT SECTION --}}
-    <section id="about" class="py-20 flex flex-col gap-16 w-full items-center bg-[#041628] text-white">
-        <h3 class="text-center text-white text-3xl font-semibold">About Us</h3>
-
-        <div class="about-section flex w-9/12 gap-10">
-            <img src="{{ asset('img/logo.png') }}" class="w-[400px] h-[400px] border-2 border-white" alt="logo" >
-            <p class="text-lg text-justify">
-                Hi, I’m Shadeva, a passionate graphic designer with a love for sports, especially football. With 2 of experience, I specialize in creating dynamic, eye-catching designs that capture the energy and excitement of the beautiful game. <br>
-
-                From club logos to matchday graphics, promotional materials, and social media content, I bring a deep understanding of both design principles and the unique demands of sports branding. My goal is to help teams, athletes, and sports organizations stand out by delivering designs that not only look great but also tell a story and connect with their audience. <br>
-                
-                I’ve had the privilege of working with a variety of sports teams, clubs, and athletes, helping them to elevate their branding and stand out in a competitive field. <br>
-
-                Whether you're looking for fresh, innovative ideas or need help bringing your vision to life, I’m here to collaborate and make it happen. Let’s create something exceptional together!
-            </p>
-        </div>
-    </section>
-    {{-- END ABOUT SECTION --}}
-
-    {{-- START CONTACT SECTION --}}
-    <section id="contact" class="py-20 flex flex-col gap-16 w-full bg-[#041628] text-white items-center">
-        <div class="head-section flex flex-col gap-2">
-            <h3 class="text-center text-white text-3xl font-semibold">Contact Us</h3>
-            <p class="text-center text-white text-lg">Got a project in mind? Let’s make it happen!</p>
-        </div>
-
-        <div class="icons-container flex flex-wrap justify-center w-10/12 gap-10">
-            
-            <div class="fiverr contact-detail w-[280px] flex flex-col gap-16 items-center pt-3 pb-7 px-3 border-2 border-white rounded-md group hover:bg-gray-800 cursor-pointer hover:shadow-md transition-all duration-300 hover:shadow-white" onclick="location.href='https://www.fiverr.com/diandrafs'">
-                <div
-                    class="w-[130px] h-[130px] mt-2 bg-cover bg-no-repeat transition-all duration-300"
-                    style="background-image: url('{{ asset('icons/icons8-fiverr.svg') }}')"
-                >
-                </div>
-            
-                <h1 class="text-white font-semibold text-lg group-hover:text-green-500 transition-all duration-300">diandrafs</h1>
-            </div>
-
-            <div class="whatsapp contact-detail w-[280px] flex flex-col gap-16 justify-between items-center pt-3 pb-7 px-3 border-2 border-white rounded-md group hover:bg-gray-800 cursor-pointer hover:shadow-md transition-all duration-300 hover:shadow-white" onclick="location.href='https://wa.me/6285771835343'">
-                <ion-icon name="logo-whatsapp" class="w-[100px] h-[100px] mt-4"></ion-icon>
-            
-                <h1 class="text-white font-semibold text-lg group-hover:text-[#25D366] transition-all duration-300">+62 8577 1835 343</h1>
-            </div>
-            
-            <div class="instagram contact-detail w-[280px] flex flex-col gap-16 justify-between items-center pt-3 pb-7 px-3 border-2 border-white rounded-md group hover:bg-gray-800 cursor-pointer hover:shadow-md transition-all duration-300 hover:shadow-white" onclick="location.href='https://www.instagram.com/shadev.design'">
-                <ion-icon name="logo-instagram" class="w-[100px] h-[100px] mt-4"></ion-icon>
-            
-                <h1 class="text-white font-semibold text-lg group-hover:text-[#ec0075] transition-all duration-300">@shadev.design</h1>
-            </div>
-            
-            <div class="email contact-detail w-[280px] flex flex-col gap-16 justify-between items-center pt-3 group pb-7 px-3 border-2 border-white rounded-md group hover:bg-gray-800 cursor-pointer hover:shadow-md transition-all duration-300 hover:shadow-white" onclick="location.href='mailto:shadevaf@gmail.com?subject=Your Subject&body=Your Message">
-                <ion-icon name="mail-outline" class="w-[100px] h-[100px] mt-4"></ion-icon>
-            
-                <h1 class="text-white font-semibold text-lg group-hover:text-[#3e65cf] transition-all duration-300">shadevaf@gmail.com</h1>
-            </div>
-            
-        </div>
-
-    </section>
-    {{-- END CONTACT SECTION --}}
-
-
 
 
     {{-- START ADD DESIGN MODAL --}}
@@ -164,6 +110,54 @@
     </div>
     {{-- END ADD DESIGN MODAL --}}
 
+
+    {{-- START DETAIL DESIGN MODAL --}}
+        <div id="imageModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-gray-900 bg-opacity-50" onclick="closeModal(event)">
+            <div class="bg-white p-4 rounded-lg shadow-lg max-w-lg w-full" onclick="event.stopPropagation()">
+                <button class="absolute top-2 right-2 text-gray-700 hover:text-gray-900" onclick="closeModal()">×</button>
+                <div id="modalContent">
+                    <!-- Image and name will be inserted here -->
+                </div>
+            </div>
+        </div>
+    {{-- END DETAIL DESIGN MODAL --}}
+
+    {{-- START EDIT DESIGN MODAL --}}
+        <div id="editModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-gray-900 bg-opacity-50" onclick="closeEditModal(event)">
+            <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full" onclick="event.stopPropagation()">
+                <button class="absolute top-2 right-2 text-gray-700 hover:text-gray-900" onclick="closeEditModal()">×</button>
+                <h2 class="text-2xl font-bold mb-4">Edit Image Details</h2>
+                <form id="editForm" action="{{ route('file.update') }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="file_id" id="editFileId">
+                    <div class="mb-4">
+                        <label for="editFileName" class="block text-sm font-medium text-gray-700">Image Name</label>
+                        <input type="text" name="name" id="editFileName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
+                    <button type="submit" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-700">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    {{-- END EDIT DESIGN MODAL --}}
+
+    {{-- START DELETE CONFIRMATION MODAL --}}
+        <div id="deleteModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-gray-900 bg-opacity-50" onclick="closeDeleteModal(event)">
+            <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full" onclick="event.stopPropagation()">
+                <button class="absolute top-2 right-2 text-gray-700 hover:text-gray-900" onclick="closeDeleteModal()">×</button>
+                <h2 class="text-xl font-bold mb-4">Are you sure you want to delete this file?</h2>
+                <form id="deleteForm" action="{{ route('file.destroy') }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="file_id" id="deleteFileId">
+                    <button type="submit" class="bg-red-500 text-white p-2 rounded hover:bg-red-700">Yes, Delete</button>
+                    <button type="button" class="bg-gray-500 text-white p-2 rounded hover:bg-gray-700" onclick="closeDeleteModal()">Cancel</button>
+                </form>
+            </div>
+        </div>
+{{-- END DELETE CONFIRMATION MODAL --}}
+
+
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
@@ -175,5 +169,7 @@
             document.getElementById('modal').classList.add('hidden');
         });
     </script>
+
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>
