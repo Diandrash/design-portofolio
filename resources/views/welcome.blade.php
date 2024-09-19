@@ -51,7 +51,7 @@
     <section id="design" class="py-20 bg-[#041628] flex flex-col gap-8 w-full items-center">
         <h3 class="text-center text-white text-3xl font-semibold">Portofolio Design</h3>
 
-        <div class="designs-container w-11/12 flex flex-wrap gap-5 ">
+        <div class="designs-container w-11/12 flex flex-wrap gap-5 justify-center">
             @foreach ($files as $file)
                 <img src="{{ $file->path }}" class="w-[310px] h-[310px] shadow-sm text-white cursor-pointer" alt="{{ $file->name }}" onclick="openModal('{{ $file->path }}', '{{ $file->name }}')">                
             @endforeach
@@ -67,7 +67,7 @@
 
         <div class="about-section flex flex-wrap w-11/12 gap-10 justify-center lg:justify-normal">
             <img src="https://res.cloudinary.com/doiymxwet/image/upload/v1726788962/portofolio-design/s5evv5fwjl1uwsxksd9a.png" class="w-9/12 lg:w-[400px] h-auto lg:h-[400px] border-2 border-white" alt="logo" >
-            <p class="text-lg text-justify w-[800px] lg:w-auto">
+            <p class="text-lg text-justify lg:w-[800px] w-auto">
                 Hi, I’m Shadeva, a passionate graphic designer with a love for sports, especially football. With 2 of experience, I specialize in creating dynamic, eye-catching designs that capture the energy and excitement of the beautiful game. <br>
 
                 From club logos to matchday graphics, promotional materials, and social media content, I bring a deep understanding of both design principles and the unique demands of sports branding. My goal is to help teams, athletes, and sports organizations stand out by delivering designs that not only look great but also tell a story and connect with their audience. <br>
@@ -90,9 +90,8 @@
         <div class="icons-container flex flex-wrap justify-center w-10/12 gap-10">
             
             <div class="fiverr contact-detail w-[280px] flex flex-col gap-16 items-center pt-3 pb-7 px-3 border-2 border-white rounded-md group hover:bg-gray-800 cursor-pointer hover:shadow-md transition-all duration-300 hover:shadow-white" onclick="location.href='https://www.fiverr.com/diandrafs'">
-                <img src="https://console.cloudinary.com/pm/c-4d30ec409ee1635165b747f3cb7825/media-explorer/portofolio-design?assetId=4963d72b0acb59d280b5cb37b02c4c5c" class="mt-2 w-[130px] h-[130px]" alt="fiverr-icons">
+                <img src="https://res.cloudinary.com/doiymxwet/image/upload/v1726788991/portofolio-design/i1sjmpemtxrwkawu0udx.svg" class="mt-2 w-[100px] h-[100px]" alt="fiverr-icons">
                 </div>
-            
                 <h1 class="text-white font-semibold text-lg group-hover:text-green-500 transition-all duration-300">diandrafs</h1>
             </div>
 
