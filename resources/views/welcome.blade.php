@@ -51,7 +51,7 @@
     <section id="design" class="py-20 bg-[#041628] flex flex-col gap-8 w-full items-center">
         <h3 class="text-center text-white text-3xl font-semibold">Portofolio Design</h3>
 
-        <div class="designs-container w-9/12 flex flex-wrap gap-5 ">
+        <div class="designs-container w-10/12 flex flex-wrap gap-5 ">
             @foreach ($files as $file)
                 <img src="{{ $file->path }}" class="w-[310px] h-[310px] shadow-sm text-white cursor-pointer" alt="{{ $file->name }}" onclick="openModal('{{ $file->path }}', '{{ $file->name }}')">                
             @endforeach
@@ -65,7 +65,7 @@
     <section id="about" class="py-20 flex flex-wrap flex-col gap-16 w-full items-center bg-[#041628] text-white">
         <h3 class="text-center text-white text-3xl font-semibold">About Us</h3>
 
-        <div class="about-section flex flex-wrap w-9/12 gap-10 justify-center lg:justify-normal">
+        <div class="about-section flex flex-wrap w-10/12 gap-10 justify-center lg:justify-normal">
             <img src="https://res.cloudinary.com/doiymxwet/image/upload/v1726788962/portofolio-design/s5evv5fwjl1uwsxksd9a.png" class="w-9/12 lg:w-[400px] h-auto lg:h-[400px] border-2 border-white" alt="logo" >
             <p class="text-lg text-justify w-auto">
                 Hi, I’m Shadeva, a passionate graphic designer with a love for sports, especially football. With 2 of experience, I specialize in creating dynamic, eye-catching designs that capture the energy and excitement of the beautiful game. <br>
@@ -92,7 +92,7 @@
             <div class="fiverr contact-detail w-[280px] flex flex-col gap-16 items-center pt-3 pb-7 px-3 border-2 border-white rounded-md group hover:bg-gray-800 cursor-pointer hover:shadow-md transition-all duration-300 hover:shadow-white" onclick="location.href='https://www.fiverr.com/diandrafs'">
                 <div
                     class="w-[130px] h-[130px] mt-2 bg-cover bg-no-repeat transition-all duration-300"
-                    style="background-image: url('https://console.cloudinary.com/pm/c-4d30ec409ee1635165b747f3cb7825/media-explorer/portofolio-design?assetId=4963d72b0acb59d280b5cb37b02c4c5c"
+                    style="background-image: url('https://console.cloudinary.com/pm/c-4d30ec409ee1635165b747f3cb7825/media-explorer/portofolio-design?assetId=4963d72b0acb59d280b5cb37b02c4c5c')"
                 >
                 </div>
             
