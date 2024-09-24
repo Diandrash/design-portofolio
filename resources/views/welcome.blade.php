@@ -91,7 +91,6 @@
             
             <div class="fiverr contact-detail w-[280px] flex flex-col gap-16 items-center pt-3 pb-7 px-3 border-2 border-white rounded-md group hover:bg-gray-800 cursor-pointer hover:shadow-md transition-all duration-300 hover:shadow-white" onclick="location.href='https://www.fiverr.com/diandrafs'">
                 <img src="https://res.cloudinary.com/doiymxwet/image/upload/v1726788991/portofolio-design/i1sjmpemtxrwkawu0udx.svg" class="mt-2 w-[100px] h-[100px]" alt="fiverr-icons">
-                </div>
                 <h1 class="text-white font-semibold text-lg group-hover:text-green-500 transition-all duration-300">diandrafs</h1>
             </div>
 
