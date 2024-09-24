@@ -40,9 +40,9 @@
     <section id="design" class="py-20 bg-[#041628] flex flex-col gap-8 w-full items-center">
         <h3 class="text-center text-white text-3xl font-semibold">Manage Portofolio Design</h3>
 
-        <div class="designs-container w-11/12 flex flex-wrap gap-5 ">
+        <div class="designs-container w-11/12 flex flex-wrap gap-5 justify-center">
 
-            <div id="input-new-design" class="w-[330px] h-auto h-min-[330px] shadow-sm text-white border-2 border-dashed border-white flex justify-center items-center hover:bg-blue-950 cursor-pointer">
+            <div id="input-new-design" class="w-[310px] h-auto h-min-[310px] shadow-sm text-white border-2 border-dashed border-white flex justify-center items-center hover:bg-blue-950 cursor-pointer">
                 <h1 class="text-xl font-semibold">Add Design</h1>
             </div>
 
